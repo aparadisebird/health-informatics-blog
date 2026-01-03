@@ -53,39 +53,76 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section with Informatics Lab Background */}
-      <header className="relative overflow-hidden bg-white border-b border-slate-100">
-        {/* Lab Sketch / Grid Pattern Overlay */}
-        <div className="absolute inset-0 opacity-[0.07] pointer-events-none" 
-             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230d9488' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}>
-        </div>
-        
-        {/* Animated Glow Elements */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-teal-100/30 rounded-full blur-[120px] animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-100/20 rounded-full blur-[120px]"></div>
+      {/* Hero Section - Informatics Lab Redesign */}
+<header className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#020617] text-white">
+  
+  {/* 1. The Technical "Blueprint" Grid */}
+  <div className="absolute inset-0 opacity-20 pointer-events-none" 
+       style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%232dd4bf' fill-opacity='0.2' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 40 40 0 39 0 39 39 0 39 0 40z'/%3E%3C/g%3E%3C/svg%3E")` }}>
+  </div>
 
-        <div className="max-w-6xl mx-auto pt-28 pb-24 px-6 relative z-10">
-          <div className="flex flex-col items-center text-center">
-            <div className="mb-6 px-6 py-2 bg-teal-50 border border-teal-100 text-teal-700 rounded-full text-[10px] font-black uppercase tracking-[0.4em] shadow-sm">
-              Informatics & Public Health Research
-            </div>
-            <h2 className="text-6xl md:text-8xl font-black text-slate-900 mb-8 leading-[0.9] tracking-tighter">
-              Data Driven <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-emerald-500 to-teal-700">
-                Healthcare.
-              </span>
-            </h2>
-            <div className="max-w-3xl bg-white/60 backdrop-blur-md border border-white p-10 rounded-[2.5rem] shadow-2xl shadow-slate-200/50 mb-10 relative">
-              <div className="absolute -top-4 -left-4 text-teal-200 opacity-50">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V12C14.017 12.5523 13.5693 13 13.017 13H11.017C10.4647 13 10.017 12.5523 10.017 12V9C10.017 7.34315 11.3601 6 13.017 6H19.017C20.6739 6 22.017 7.34315 22.017 9V15C22.017 16.6569 20.6739 18 19.017 18H17.017C16.4647 18 16.017 18.4477 16.017 19V21H14.017ZM4.017 21L4.017 18C4.017 16.8954 4.91243 16 6.017 16H9.017C9.56928 16 10.017 15.5523 10.017 15V9C10.017 8.44772 9.56928 8 9.017 8H5.017C4.46472 8 4.017 8.44772 4.017 9V12C4.017 12.5523 3.56928 13 3.017 13H1.017C0.464718 13 0.017 12.5523 0.017 12V9C0.017 7.34315 1.36015 6 3.017 6H9.017C10.6739 6 12.017 7.34315 12.017 9V15C12.017 16.6569 10.6739 18 9.017 18H7.017C6.46472 18 6.017 18.4477 6.017 19V21H4.017Z"/></svg>
-              </div>
-              <p className="text-xl md:text-2xl text-slate-700 leading-relaxed font-medium italic">
-                Translating complex health data into impactful community stories. Exploring the intersection of digital systems and human well-being in Bangladesh.
-              </p>
-            </div>
-          </div>
+  {/* 2. Dynamic Lab Elements (Blobs & Orbs) */}
+  <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-teal-600/20 rounded-full blur-[120px] animate-pulse"></div>
+  <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-emerald-600/10 rounded-full blur-[120px]"></div>
+
+  {/* 3. Decorative "Data Nodes" SVG Sketch */}
+  <svg className="absolute inset-0 w-full h-full opacity-30 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+        <circle fill="#2dd4bf" cx="50" cy="50" r="1" />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#dots)" />
+    {/* Floating Lines representing connections */}
+    <line x1="10%" y1="20%" x2="30%" y2="40%" stroke="#2dd4bf" strokeWidth="0.5" strokeDasharray="5,5" />
+    <line x1="80%" y1="10%" x2="60%" y2="50%" stroke="#10b981" strokeWidth="0.5" strokeDasharray="5,5" />
+  </svg>
+
+  {/* 4. Main Content Container */}
+  <div className="max-w-6xl mx-auto px-6 relative z-10 text-center">
+    <div className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 bg-teal-500/10 border border-teal-500/20 rounded-full backdrop-blur-md">
+      <span className="relative flex h-2 w-2">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
+      </span>
+      <span className="text-[10px] font-black uppercase tracking-[0.4em] text-teal-400">
+        Public Health Informatics Lab
+      </span>
+    </div>
+
+    <h2 className="text-6xl md:text-[100px] font-black leading-[0.85] tracking-tighter mb-10">
+      Transforming <br/>
+      <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-emerald-400 to-teal-500 italic">
+        Human Data.
+      </span>
+    </h2>
+
+    {/* Glassmorphism Quote Box */}
+    <div className="max-w-3xl mx-auto relative group">
+      <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-[2.5rem] blur opacity-25"></div>
+      <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 p-10 rounded-[2.5rem] shadow-2xl">
+        <p className="text-xl md:text-2xl text-slate-300 leading-relaxed font-light">
+          "I am <span className="text-white font-bold">Shifat Shahriar Siam</span>. I build bridges between medical science and software architecture to solve the healthcare challenges of tomorrow."
+        </p>
+        <div className="mt-8 flex justify-center gap-4">
+          <div className="h-1 w-12 bg-teal-500 rounded-full"></div>
+          <div className="h-1 w-4 bg-slate-700 rounded-full"></div>
+          <div className="h-1 w-4 bg-slate-700 rounded-full"></div>
         </div>
-      </header>
+      </div>
+    </div>
+    
+    {/* Tech Stack Badges (Visual Only for the Lab vibe) */}
+    <div className="mt-12 flex justify-center gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
+       <span className="text-xs font-mono tracking-widest text-teal-400">PYTHON.ML</span>
+       <span className="text-xs font-mono tracking-widest text-teal-400">DATA.INF</span>
+       <span className="text-xs font-mono tracking-widest text-teal-400">EPIDEMIOLOGY</span>
+    </div>
+  </div>
+
+  {/* Bottom Fade */}
+  <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#f8fafc] to-transparent"></div>
+</header>
 
       {/* Publications Section */}
       <section id="publications" className="max-w-6xl mx-auto px-6 py-24">
