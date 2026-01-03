@@ -34,11 +34,10 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#f8fafc]">
       <nav className="p-6 flex justify-between items-center bg-white border-b border-slate-100 sticky top-0 z-50">
-        <h1 className="text-2xl font-bold text-teal-700 tracking-tight">The Health Nexus</h1>
-        <div className="space-x-8 font-medium text-slate-600">
-          <Link href="/" className="hover:text-teal-600 transition">Home</Link>
-          <Link href="/login" className="hover:text-teal-600 transition">Admin Login</Link>
-        </div>
+        <div className="flex items-center gap-2">
+  <Logo className="w-10 h-10 shadow-lg" />
+  <h1 className="text-xl font-bold text-slate-900 tracking-tight">HealthNexus<span className="text-teal-600">BD</span></h1>
+</div>
       </nav>
 
       <header className="max-w-5xl mx-auto pt-20 pb-16 px-6 text-center">
