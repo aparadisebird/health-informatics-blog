@@ -129,7 +129,7 @@ export default function Home() {
   </div>
 </header>
 
-      {/* Publications Section - Compact & Fully Clickable */}
+      {/* Publications Section - Compact, Clickable, with Dates */}
 <section id="publications" className="max-w-6xl mx-auto px-6 py-20">
   <div className="flex items-center gap-4 mb-12">
     <h3 className="text-3xl font-black text-slate-900 tracking-tighter">Latest Stories</h3>
@@ -146,7 +146,6 @@ export default function Home() {
           href={`/posts/${post.slug}`}
           className="group relative bg-white rounded-[2rem] overflow-hidden border border-stone-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-500 flex flex-col cursor-pointer"
         >
-          {/* Shorter Image Height */}
           <div className="relative h-48 w-full overflow-hidden">
             <img 
               src={post.imageUrl} 
@@ -158,21 +157,26 @@ export default function Home() {
             </div>
           </div>
 
-          {/* More Compact Padding */}
           <div className="p-7 flex-1 flex flex-col">
             <h4 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-teal-600 transition-colors leading-tight">
               {post.title}
             </h4>
             
             <div className="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
-              <span className="text-teal-600 font-bold text-xs flex items-center gap-2">
+              <span className="text-teal-600 font-bold text-xs">
                 Read Full Story <span>→</span>
               </span>
-              {/* Optional: Add a small icon or date here if you wish */}
+              {/* AUTOMATIC DATE DISPLAY */}
+              <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">
+                {post.createdAt ? new Date(post.createdAt.seconds * 1000).toLocaleDateString('en-US', {
+                  month: 'short',
+                  day: 'numeric',
+                  year: 'numeric'
+                }) : 'Recently'}
+              </span>
             </div>
           </div>
 
-          {/* Subtle Bottom Accent Line */}
           <div className="h-1.5 w-full bg-gradient-to-r from-teal-500 to-emerald-400 transform scale-x-0 group-hover:scale-x-100 transition-all origin-left"></div>
         </Link>
       ))}
