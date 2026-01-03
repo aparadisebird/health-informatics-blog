@@ -129,39 +129,56 @@ export default function Home() {
   </div>
 </header>
 
-      {/* Publications Section */}
-      <section id="publications" className="max-w-6xl mx-auto px-6 py-24">
-        <div className="flex items-center gap-4 mb-16">
-          <h3 className="text-4xl font-black text-slate-900 tracking-tighter">Latest Publications</h3>
-          <div className="h-px flex-1 bg-slate-200"></div>
-        </div>
-        
-        {loading ? (
-          <div className="text-center py-20 text-slate-400 font-medium italic">Retrieving research data...</div>
-        ) : (
-          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post) => (
-              <div key={post.id} className="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col">
-                <div className="relative h-64 w-full overflow-hidden">
-                  <img src={post.imageUrl} className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" />
-                  <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black text-teal-600 tracking-[0.2em] uppercase shadow-sm">
-                    {post.category}
-                  </div>
-                </div>
-                <div className="p-10 flex-1 flex flex-col">
-                  <h4 className="text-2xl font-bold text-slate-900 mb-6 group-hover:text-teal-600 transition-colors leading-tight">{post.title}</h4>
-                  <div className="mt-auto pt-6 border-t border-slate-50">
-                    <Link href={`/posts/${post.slug}`} className="text-teal-600 font-bold text-sm flex items-center gap-2 group-hover:gap-4 transition-all">
-                      View Full Research <span>→</span>
-                    </Link>
-                  </div>
-                </div>
-                <div className="h-2 w-full bg-gradient-to-r from-teal-500 to-emerald-400 transform scale-x-0 group-hover:scale-x-100 transition-all origin-left"></div>
-              </div>
-            ))}
+      {/* Publications Section - Compact & Fully Clickable */}
+<section id="publications" className="max-w-6xl mx-auto px-6 py-20">
+  <div className="flex items-center gap-4 mb-12">
+    <h3 className="text-3xl font-black text-slate-900 tracking-tighter">Latest Stories</h3>
+    <div className="h-px flex-1 bg-slate-200"></div>
+  </div>
+  
+  {loading ? (
+    <div className="text-center py-20 text-slate-400 font-medium italic">Retrieving research data...</div>
+  ) : (
+    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => (
+        <Link 
+          key={post.id} 
+          href={`/posts/${post.slug}`}
+          className="group relative bg-white rounded-[2rem] overflow-hidden border border-stone-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-500 flex flex-col cursor-pointer"
+        >
+          {/* Shorter Image Height */}
+          <div className="relative h-48 w-full overflow-hidden">
+            <img 
+              src={post.imageUrl} 
+              className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" 
+              alt={post.title}
+            />
+            <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[9px] font-black text-teal-600 tracking-[0.2em] uppercase shadow-sm">
+              {post.category}
+            </div>
           </div>
-        )}
-      </section>
+
+          {/* More Compact Padding */}
+          <div className="p-7 flex-1 flex flex-col">
+            <h4 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-teal-600 transition-colors leading-tight">
+              {post.title}
+            </h4>
+            
+            <div className="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
+              <span className="text-teal-600 font-bold text-xs flex items-center gap-2">
+                Read Full Story <span>→</span>
+              </span>
+              {/* Optional: Add a small icon or date here if you wish */}
+            </div>
+          </div>
+
+          {/* Subtle Bottom Accent Line */}
+          <div className="h-1.5 w-full bg-gradient-to-r from-teal-500 to-emerald-400 transform scale-x-0 group-hover:scale-x-100 transition-all origin-left"></div>
+        </Link>
+      ))}
+    </div>
+  )}
+</section>
 
       {/* About Shifat Section */}
       <section id="about" className="bg-slate-900 text-white py-32 px-6 mt-10 rounded-t-[4rem] border-t-8 border-teal-500 relative overflow-hidden">
