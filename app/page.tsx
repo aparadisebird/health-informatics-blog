@@ -53,7 +53,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section - Clinical Portfolio Design */}
+      {/* Hero Section - Informatics Enthusiast Design */}
 <header className="relative min-h-[85vh] flex items-center overflow-hidden bg-[#fdfcfb] border-b border-stone-200">
   
   {/* 1. Background Technical Grid (Subtle) */}
@@ -67,75 +67,62 @@ export default function Home() {
     <div className="text-left">
       <div className="inline-flex items-center gap-3 mb-6 px-4 py-1 bg-teal-50 border border-teal-100 rounded-full">
         <div className="w-2 h-2 bg-teal-500 rounded-full animate-pulse"></div>
-        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-teal-700">Research & Informatics</span>
+        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-teal-700">Tech & Health Awareness</span>
       </div>
 
       <h2 className="text-5xl md:text-7xl font-black text-stone-900 leading-[1.05] mb-8 tracking-tighter">
-        Documenting the <br/>
-        <span className="italic font-serif text-teal-700 font-light">Nexus</span> of Global <br/>
+        Exploring the <br/>
+        <span className="italic font-serif text-teal-700 font-light">Nexus</span> of Tech & <br/>
         Public Health.
       </h2>
 
       <div className="relative group max-w-lg">
         <div className="absolute -left-4 top-0 bottom-0 w-1 bg-teal-500 rounded-full"></div>
         <p className="text-xl text-stone-600 leading-relaxed font-medium pl-4">
-          "I am <span className="text-stone-900">Shifat Shahriar Siam</span>. I specialize in translating complex epidemiological data into digital interventions that bridge the gap between technology and community care."
+          "I am <span className="text-stone-900">Shifat Shahriar Siam</span>. I’m a tech enthusiast passionate about AI in healthcare. I love writing blogs and sharing insights to raise public awareness about the future of digital health."
         </p>
       </div>
 
       <div className="mt-10 flex gap-4">
         <Link href="#publications" className="px-8 py-3 bg-stone-900 text-white rounded-xl font-bold text-sm hover:bg-teal-700 transition-all shadow-xl shadow-stone-200">
-          Read Publications
+          Explore Blogs
         </Link>
         <Link href="#about" className="px-8 py-3 bg-white border border-stone-200 text-stone-600 rounded-xl font-bold text-sm hover:border-teal-500 transition-all">
-          My Journey
+          My Story
         </Link>
       </div>
     </div>
 
-    {/* RIGHT SIDE: Abstract Lab Sketch Component */}
+    {/* RIGHT SIDE: Abstract Lab Sketch Component with BIGGER LOGO */}
     <div className="hidden md:flex justify-center relative">
-      {/* Decorative SVG Lab Sketch */}
-      <div className="relative w-full max-w-md h-[450px] bg-white border border-stone-100 rounded-[3rem] shadow-2xl overflow-hidden group">
+      <div className="relative w-full max-w-md h-[480px] bg-white border border-stone-100 rounded-[3rem] shadow-2xl overflow-hidden group">
         
         {/* Abstract Medical Patterns */}
         <div className="absolute inset-0 p-8">
             <div className="w-full h-full border-2 border-dashed border-stone-100 rounded-[2rem] flex items-center justify-center relative">
                 
-                {/* Visualizing "The Nexus" - Floating Nodes */}
-                <div className="absolute top-10 left-10 w-12 h-12 bg-teal-50 rounded-xl border border-teal-100 flex items-center justify-center text-teal-600 font-black">AI</div>
-                <div className="absolute bottom-20 left-10 w-16 h-16 bg-stone-50 rounded-full border border-stone-200 flex items-center justify-center text-stone-400 font-black">DATA</div>
-                <div className="absolute top-1/2 right-10 w-20 h-20 bg-emerald-50 rounded-3xl rotate-12 border border-emerald-100 flex items-center justify-center text-emerald-600 font-black">HEALTH</div>
+                {/* Floating Tech Nodes */}
+                <div className="absolute top-8 left-8 w-14 h-14 bg-teal-50 rounded-2xl border border-teal-100 flex items-center justify-center text-[10px] text-teal-600 font-black shadow-sm">AI</div>
+                <div className="absolute bottom-16 right-8 w-16 h-16 bg-stone-50 rounded-full border border-stone-200 flex items-center justify-center text-[10px] text-stone-400 font-black shadow-sm">BLOGS</div>
+                <div className="absolute bottom-12 left-12 w-20 h-20 bg-emerald-50 rounded-3xl -rotate-12 border border-emerald-100 flex items-center justify-center text-[10px] text-emerald-600 font-black shadow-sm">AWARENESS</div>
                 
                 {/* Connecting Lines */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
-                    <line x1="50" y1="50" x2="200" y2="200" stroke="teal" strokeWidth="2" strokeDasharray="4" />
-                    <line x1="250" y1="100" x2="100" y2="300" stroke="teal" strokeWidth="1" />
+                    <line x1="15%" y1="15%" x2="50%" y2="50%" stroke="teal" strokeWidth="1.5" strokeDasharray="6" />
+                    <line x1="85%" y1="85%" x2="50%" y2="50%" stroke="teal" strokeWidth="1" />
+                    <line x1="20%" y1="80%" x2="50%" y2="50%" stroke="teal" strokeWidth="1.5" strokeDasharray="4" />
                 </svg>
 
-                <div className="text-center">
-                    <Logo className="h-24 w-auto mx-auto mb-4 opacity-80 group-hover:scale-110 transition-transform duration-700" />
-                    <p className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Informatics Framework v2.0</p>
+                {/* THE BIGGER LOGO */}
+                <div className="text-center z-10">
+                    <Logo className="h-32 md:h-40 w-auto mx-auto mb-4 drop-shadow-md group-hover:scale-105 transition-transform duration-700" />
+                    <p className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Digital Health Nexus</p>
                 </div>
             </div>
         </div>
         
-        {/* Subtle Bottom Accent */}
+        {/* Bottom Accent */}
         <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-teal-500 via-emerald-400 to-teal-600"></div>
-      </div>
-      
-      {/* Floating Badge */}
-      <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-2xl border border-stone-100 flex items-center gap-4">
-          <div className="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center text-teal-600">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
-            </svg>
-          </div>
-          <div>
-            <p className="text-[10px] font-black text-stone-400 uppercase">Current Focus</p>
-            <p className="text-sm font-bold text-stone-800 tracking-tight">Predictive Epidemiology</p>
-          </div>
       </div>
     </div>
 
