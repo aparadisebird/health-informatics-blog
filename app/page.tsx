@@ -34,18 +34,24 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#f8fafc]">
-      {/* Navigation */}
+      {/* Navigation - Restored Tabs and Large Logo */}
       <nav className="p-4 bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <Logo className="h-14 md:h-16 w-auto" />
-            <h1 className="text-xl font-bold text-slate-900 tracking-tight hidden sm:block">
+          <div className="flex items-center gap-4">
+            {/* Clickable PNG Logo - h-20 for visibility */}
+            <Logo className="h-16 md:h-20 w-auto" />
+            <h1 className="text-xl font-black text-slate-900 tracking-tighter hidden lg:block border-l pl-4 border-slate-200">
               HealthNexus<span className="text-teal-600">BD</span>
             </h1>
           </div>
-          <div className="flex items-center gap-6 font-semibold text-sm uppercase tracking-wider">
-            <Link href="/" className="text-slate-600 hover:text-teal-600 transition">Home</Link>
-            <Link href="/login" className="px-4 py-2 bg-slate-900 text-white rounded-full hover:bg-teal-600 transition shadow-md">Admin</Link>
+
+          <div className="flex items-center gap-6">
+            <Link href="/" className="text-sm font-bold text-slate-600 hover:text-teal-600 uppercase tracking-widest transition">
+              Home
+            </Link>
+            <Link href="/login" className="px-5 py-2 bg-slate-900 text-white rounded-full text-sm font-bold hover:bg-teal-600 transition shadow-lg shadow-slate-200">
+              Admin Panel
+            </Link>
           </div>
         </div>
       </nav>
@@ -54,17 +60,17 @@ export default function Home() {
       <header className="max-w-6xl mx-auto pt-24 pb-20 px-6">
         <div className="flex flex-col items-center text-center">
           <div className="mb-6 px-5 py-2 bg-teal-50 border border-teal-100 text-teal-700 rounded-full text-[10px] font-black uppercase tracking-[0.3em]">
-            Public Health Informatics Portfolio
+            A Digital Health Initiative
           </div>
           <h2 className="text-5xl md:text-7xl font-black text-slate-900 mb-8 leading-tight tracking-tight">
-            Connecting Data to <br/>
+            Documenting the Future of <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-500">
-              Community Well-being.
+              Informatics & Public Health.
             </span>
           </h2>
           <div className="max-w-3xl bg-white border border-slate-100 p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 mb-10">
             <p className="text-xl text-slate-600 leading-relaxed italic">
-              "I am <span className="text-slate-900 font-bold not-italic">Shifat Shahriar Siam</span>, a Public Health student at Jahangirnagar University. This platform explores the intersection of informatics and health outcomes in Bangladesh."
+              "I am <span className="text-slate-900 font-bold not-italic">Shifat Shahriar Siam</span>, a Public Health & Informatics student at Jahangirnagar University. I created <span className="text-teal-600 font-bold not-italic">The Health Nexus</span> to translate complex health data into meaningful stories."
             </p>
           </div>
         </div>
@@ -72,9 +78,9 @@ export default function Home() {
 
       {/* Publications Section */}
       <section className="max-w-6xl mx-auto px-6 py-10">
-        <h3 className="text-3xl font-bold text-slate-800 mb-12 tracking-tight">Latest Analysis</h3>
+        <h3 className="text-3xl font-bold text-slate-800 mb-12 tracking-tight">Latest Publications</h3>
         {loading ? (
-          <div className="text-center py-20 text-slate-400 italic">Loading research...</div>
+          <div className="text-center py-20 text-slate-400 font-medium italic">Retrieving research data...</div>
         ) : (
           <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
@@ -89,11 +95,11 @@ export default function Home() {
                   <h4 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-teal-600 transition-colors leading-snug">{post.title}</h4>
                   <div className="mt-auto pt-6 border-t border-slate-50">
                     <Link href={`/posts/${post.slug}`} className="text-teal-600 font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-                      Read Research <span>→</span>
+                      Read Analysis <span>→</span>
                     </Link>
                   </div>
                 </div>
-                <div className="h-1.5 w-full bg-teal-500 transform scale-x-0 group-hover:scale-x-100 transition-all origin-left"></div>
+                <div className="h-1.5 w-full bg-gradient-to-r from-teal-500 to-emerald-400 transform scale-x-0 group-hover:scale-x-100 transition-all origin-left"></div>
               </div>
             ))}
           </div>
@@ -114,13 +120,13 @@ export default function Home() {
           <div className="flex-1 text-center md:text-left">
             <h3 className="text-4xl md:text-5xl font-extrabold mb-2 uppercase tracking-tighter">Shifat Shahriar Siam</h3>
             <p className="text-teal-400 font-bold mb-6 uppercase tracking-widest text-sm">
-              Public Health and Informatics | Jahangirnagar University
+              Dept. of Public Health and Informatics | Jahangirnagar University
             </p>
-            <p className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl">
-              Focusing on the digitalization of healthcare systems in the Global South. Specializing in epidemiology, data-driven policymaking, and clinical informatics.
+            <p className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl font-medium">
+              I am a Public Health specialist from Bangladesh focused on **Informatics**. I aim to build resilient digital health systems that improve clinical outcomes across the global south.
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-3">
-              {['Epidemiology', 'Health Informatics', 'Biostatistics'].map((s) => (
+              {['Epidemiology', 'Health Informatics', 'Research Methodology'].map((s) => (
                 <span key={s} className="bg-slate-800 border border-slate-700 px-4 py-2 rounded-xl text-xs text-teal-300 font-bold uppercase">{s}</span>
               ))}
             </div>
@@ -139,21 +145,29 @@ export default function Home() {
                 <h4 className="text-2xl font-bold tracking-tighter italic">The Health Nexus</h4>
               </div>
               <p className="text-slate-400 text-lg max-w-md leading-relaxed">
-                A platform dedicated to health informatics research and local clinical contexts in Bangladesh.
+                Exploring the intersection of data and human well-being. Built to foster a 
+                health-literate society through informatics and evidence-based storytelling.
               </p>
             </div>
             <div>
-              <h5 className="text-teal-400 font-bold uppercase tracking-widest text-[10px] mb-6">Contact Info</h5>
+              <h5 className="text-teal-400 font-bold uppercase tracking-widest text-[10px] mb-6">Navigation</h5>
+              <ul className="space-y-4 text-slate-300 font-medium">
+                <li><Link href="/" className="hover:text-white transition-colors">Home Feed</Link></li>
+                <li><Link href="/login" className="hover:text-white transition-colors">Admin Dashboard</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="text-teal-400 font-bold uppercase tracking-widest text-[10px] mb-6">Identity</h5>
               <p className="text-slate-300 leading-relaxed text-sm">
                 Shifat Shahriar Siam<br/>
-                Jahangirnagar University<br/>
-                siam.bph.ju@gmail.com
+                Dept. of Public Health & Informatics<br/>
+                Jahangirnagar University
               </p>
             </div>
           </div>
           <div className="pt-8 border-t border-slate-800/50 flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-slate-500 text-xs uppercase tracking-widest">
-              © 2026 HealthNexusBD. Developed by Shifat Shahriar Siam.
+              © 2026 Developed by Shifat Shahriar Siam. All rights reserved.
             </p>
             <div className="flex gap-6">
               <a href="mailto:siam.bph.ju@gmail.com" className="text-slate-500 hover:text-teal-400 transition-colors text-xs font-bold uppercase tracking-widest">Email</a>
