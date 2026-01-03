@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import Link from 'next/link';
+import Logo from "@/components/Logo";
 
 interface Post {
   id: string;
