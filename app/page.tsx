@@ -53,66 +53,92 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section - Creamy Academic Lab Design */}
-<header className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[#fafaf9] border-b border-stone-200">
+      {/* Hero Section - Clinical Portfolio Design */}
+<header className="relative min-h-[85vh] flex items-center overflow-hidden bg-[#fdfcfb] border-b border-stone-200">
   
-  {/* 1. Subtle Paper/Grid Texture */}
-  <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-       style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M100 0H0v100h100V0zM1 99V1h98v98H1z' fill='%230d9488' fill-rule='evenodd'/%3E%3C/svg%3E")` }}>
+  {/* 1. Background Technical Grid (Subtle) */}
+  <div className="absolute inset-0 opacity-[0.04] pointer-events-none" 
+       style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0H0v30h30V0zM1 29V1h28v28H1z' fill='%230d9488' fill-rule='evenodd'/%3E%3C/svg%3E")` }}>
   </div>
 
-  {/* 2. Soft "Aura" Glows - Creamy & Teal */}
-  <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-teal-600/5 rounded-full blur-[100px]"></div>
-  <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-stone-400/10 rounded-full blur-[100px]"></div>
+  <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+    
+    {/* LEFT SIDE: Typography & Vision */}
+    <div className="text-left">
+      <div className="inline-flex items-center gap-3 mb-6 px-4 py-1 bg-teal-50 border border-teal-100 rounded-full">
+        <div className="w-2 h-2 bg-teal-500 rounded-full animate-pulse"></div>
+        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-teal-700">Research & Informatics</span>
+      </div>
 
-  {/* 3. Decorative Scientific Lines (SVG) */}
-  <svg className="absolute inset-0 w-full h-full opacity-[0.1] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-    <line x1="0" y1="20%" x2="100%" y2="20%" stroke="#0d9488" strokeWidth="0.5" />
-    <line x1="20%" y1="0" x2="20%" y2="100%" stroke="#0d9488" strokeWidth="0.5" />
-    <circle cx="20%" cy="20%" r="4" fill="#0d9488" />
-  </svg>
+      <h2 className="text-5xl md:text-7xl font-black text-stone-900 leading-[1.05] mb-8 tracking-tighter">
+        Documenting the <br/>
+        <span className="italic font-serif text-teal-700 font-light">Nexus</span> of Global <br/>
+        Public Health.
+      </h2>
 
-  {/* 4. Content Container */}
-  <div className="max-w-6xl mx-auto px-6 relative z-10 text-center">
-    <div className="inline-block mb-8 px-6 py-2 bg-white border border-stone-200 rounded-full shadow-sm">
-      <span className="text-[10px] font-black uppercase tracking-[0.5em] text-stone-500">
-        The Health Nexus <span className="text-teal-600">Archive</span>
-      </span>
-    </div>
-
-    <h2 className="text-5xl md:text-8xl font-extrabold text-stone-900 mb-10 leading-[1.1] tracking-tight">
-      Bridging Data <br/>
-      <span className="text-teal-700/80 serif italic font-serif">with Human Impact.</span>
-    </h2>
-
-    {/* Elegant Content Box */}
-    <div className="max-w-3xl mx-auto relative">
-      <div className="relative bg-white border border-stone-100 p-10 md:p-14 rounded-[3rem] shadow-xl shadow-stone-200/50">
-        <p className="text-xl md:text-2xl text-stone-600 leading-relaxed font-light">
-          "A specialized repository for <span className="text-stone-900 font-bold underline decoration-teal-500/30 decoration-4 underline-offset-4">Health Informatics</span> research, focusing on the intersection of epidemiological trends and digital interventions in Bangladesh."
+      <div className="relative group max-w-lg">
+        <div className="absolute -left-4 top-0 bottom-0 w-1 bg-teal-500 rounded-full"></div>
+        <p className="text-xl text-stone-600 leading-relaxed font-medium pl-4">
+          "I am <span className="text-stone-900">Shifat Shahriar Siam</span>. I specialize in translating complex epidemiological data into digital interventions that bridge the gap between technology and community care."
         </p>
-        
-        {/* Author Credit */}
-        <div className="mt-10 pt-10 border-t border-stone-50 flex items-center justify-center gap-4">
-            <div className="h-px w-8 bg-stone-200"></div>
-            <span className="text-xs font-black uppercase tracking-widest text-stone-400">Published by Shifat Shahriar Siam</span>
-            <div className="h-px w-8 bg-stone-200"></div>
-        </div>
+      </div>
+
+      <div className="mt-10 flex gap-4">
+        <Link href="#publications" className="px-8 py-3 bg-stone-900 text-white rounded-xl font-bold text-sm hover:bg-teal-700 transition-all shadow-xl shadow-stone-200">
+          Read Publications
+        </Link>
+        <Link href="#about" className="px-8 py-3 bg-white border border-stone-200 text-stone-600 rounded-xl font-bold text-sm hover:border-teal-500 transition-all">
+          My Journey
+        </Link>
       </div>
     </div>
-    
-    {/* Scientific Sub-text */}
-    <div className="mt-12 flex justify-center items-center gap-10 text-stone-400">
-       <div className="flex flex-col items-center">
-          <span className="text-stone-900 font-bold text-lg leading-none">02</span>
-          <span className="text-[9px] uppercase tracking-tighter font-bold">Research Papers</span>
-       </div>
-       <div className="h-8 w-px bg-stone-200"></div>
-       <div className="flex flex-col items-center">
-          <span className="text-stone-900 font-bold text-lg leading-none">BPH</span>
-          <span className="text-[9px] uppercase tracking-tighter font-bold">Jahangirnagar</span>
-       </div>
+
+    {/* RIGHT SIDE: Abstract Lab Sketch Component */}
+    <div className="hidden md:flex justify-center relative">
+      {/* Decorative SVG Lab Sketch */}
+      <div className="relative w-full max-w-md h-[450px] bg-white border border-stone-100 rounded-[3rem] shadow-2xl overflow-hidden group">
+        
+        {/* Abstract Medical Patterns */}
+        <div className="absolute inset-0 p-8">
+            <div className="w-full h-full border-2 border-dashed border-stone-100 rounded-[2rem] flex items-center justify-center relative">
+                
+                {/* Visualizing "The Nexus" - Floating Nodes */}
+                <div className="absolute top-10 left-10 w-12 h-12 bg-teal-50 rounded-xl border border-teal-100 flex items-center justify-center text-teal-600 font-black">AI</div>
+                <div className="absolute bottom-20 left-10 w-16 h-16 bg-stone-50 rounded-full border border-stone-200 flex items-center justify-center text-stone-400 font-black">DATA</div>
+                <div className="absolute top-1/2 right-10 w-20 h-20 bg-emerald-50 rounded-3xl rotate-12 border border-emerald-100 flex items-center justify-center text-emerald-600 font-black">HEALTH</div>
+                
+                {/* Connecting Lines */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
+                    <line x1="50" y1="50" x2="200" y2="200" stroke="teal" strokeWidth="2" strokeDasharray="4" />
+                    <line x1="250" y1="100" x2="100" y2="300" stroke="teal" strokeWidth="1" />
+                </svg>
+
+                <div className="text-center">
+                    <Logo className="h-24 w-auto mx-auto mb-4 opacity-80 group-hover:scale-110 transition-transform duration-700" />
+                    <p className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Informatics Framework v2.0</p>
+                </div>
+            </div>
+        </div>
+        
+        {/* Subtle Bottom Accent */}
+        <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-teal-500 via-emerald-400 to-teal-600"></div>
+      </div>
+      
+      {/* Floating Badge */}
+      <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-2xl border border-stone-100 flex items-center gap-4">
+          <div className="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center text-teal-600">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
+            </svg>
+          </div>
+          <div>
+            <p className="text-[10px] font-black text-stone-400 uppercase">Current Focus</p>
+            <p className="text-sm font-bold text-stone-800 tracking-tight">Predictive Epidemiology</p>
+          </div>
+      </div>
     </div>
+
   </div>
 </header>
 
