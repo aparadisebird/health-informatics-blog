@@ -12,6 +12,10 @@ interface Post {
   imageUrl: string;
   content: string;
   slug: string;
+  createdAt?: {
+    seconds: number;
+    nanoseconds: number;
+  };
 }
 
 export default function Home() {
