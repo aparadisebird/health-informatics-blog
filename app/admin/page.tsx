@@ -4,10 +4,7 @@ import { db, auth } from "@/lib/firebase";
 import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, serverTimestamp, query, orderBy } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
-
-const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
-import "react-quill-new/dist/quill.snow.css";
+import { Editor } from "@tinymce/tinymce-react"; // New Import
 
 export default function AdminDashboard() {
   const [posts, setPosts] = useState<any[]>([]);
@@ -59,7 +56,7 @@ export default function AdminDashboard() {
 
   const resetForm = () => { setEditingId(null); setTitle(""); setCategory(""); setImage(""); setContent(""); };
 
-  if (loading) return <div className="p-20 text-center">Loading...</div>;
+  if (loading) return <div className="p-20 text-center font-bold text-teal-600">Loading Dashboard...</div>;
 
   return (
     <div className="min-h-screen bg-slate-50 p-6 md:p-10">
@@ -68,25 +65,61 @@ export default function AdminDashboard() {
           <h1 className="text-3xl font-black text-slate-900">Nexus Admin</h1>
           <button onClick={() => auth.signOut()} className="text-red-600 font-bold">Logout</button>
         </div>
+        
         <div className="flex gap-4 mb-8">
-          <button onClick={() => {setTab("manage"); resetForm();}} className={`px-6 py-2 rounded-full font-bold ${tab==='manage'?'bg-teal-600 text-white':'bg-white border'}`}>Manage</button>
-          <button onClick={() => setTab("create")} className={`px-6 py-2 rounded-full font-bold ${tab==='create'?'bg-teal-600 text-white':'bg-white border'}`}>{editingId?"Edit Post":"New Post"}</button>
+          <button onClick={() => {setTab("manage"); resetForm();}} className={`px-6 py-2 rounded-full font-bold transition ${tab==='manage'?'bg-teal-600 text-white':'bg-white border text-slate-600'}`}>Manage Posts</button>
+          <button onClick={() => setTab("create")} className={`px-6 py-2 rounded-full font-bold transition ${tab==='create'?'bg-teal-600 text-white':'bg-white border text-slate-600'}`}>{editingId?"Edit Publication":"New Publication"}</button>
         </div>
+
         {tab === "manage" ? (
-          <div className="grid gap-4">{posts.map(p => (
-            <div key={p.id} className="bg-white p-4 rounded-xl border flex justify-between items-center">
-              <div><h3 className="font-bold">{p.title}</h3><p className="text-xs text-teal-600 uppercase font-bold">{p.category}</p></div>
-              <div className="flex gap-2"><button onClick={()=>startEdit(p)} className="px-3 py-1 bg-blue-50 text-blue-600 rounded font-bold text-sm">Edit</button>
-              <button onClick={()=>deletePost(p.id)} className="px-3 py-1 bg-red-50 text-red-600 rounded font-bold text-sm">Delete</button></div>
-            </div>
-          ))}</div>
+          <div className="grid gap-4">
+            {posts.map(p => (
+              <div key={p.id} className="bg-white p-5 rounded-2xl border border-slate-200 flex justify-between items-center shadow-sm">
+                <div>
+                  <h3 className="font-bold text-slate-900">{p.title}</h3>
+                  <p className="text-xs text-teal-600 uppercase font-black tracking-widest">{p.category}</p>
+                </div>
+                <div className="flex gap-3">
+                  <button onClick={()=>startEdit(p)} className="px-4 py-2 bg-slate-100 text-slate-700 rounded-xl font-bold text-xs hover:bg-teal-50 hover:text-teal-700 transition">Edit</button>
+                  <button onClick={()=>deletePost(p.id)} className="px-4 py-2 bg-red-50 text-red-600 rounded-xl font-bold text-xs hover:bg-red-600 hover:text-white transition">Delete</button>
+                </div>
+              </div>
+            ))}
+          </div>
         ) : (
-          <form onSubmit={handleSubmit} className="bg-white p-8 rounded-3xl shadow-lg space-y-4">
-            <input className="w-full p-3 border-b text-xl font-bold outline-none" placeholder="Title" value={title} onChange={e=>setTitle(e.target.value)} required />
-            <input className="w-full p-3 border-b outline-none" placeholder="Category" value={category} onChange={e=>setCategory(e.target.value)} required />
-            <input className="w-full p-3 border-b outline-none" placeholder="Image URL" value={image} onChange={e=>setImage(e.target.value)} />
-            <div className="h-80 mb-12"><ReactQuill theme="snow" value={content} onChange={setContent} className="h-full" /></div>
-            <button type="submit" className="w-full bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-teal-600 transition-all mt-10">Save Publication</button>
+          <form onSubmit={handleSubmit} className="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <input className="w-full p-4 bg-slate-50 rounded-2xl border-none outline-none focus:ring-2 focus:ring-teal-500 font-bold" placeholder="Article Title" value={title} onChange={e=>setTitle(e.target.value)} required />
+              <input className="w-full p-4 bg-slate-50 rounded-2xl border-none outline-none focus:ring-2 focus:ring-teal-500 font-bold" placeholder="Category (e.g. Research)" value={category} onChange={e=>setCategory(e.target.value)} required />
+            </div>
+            <input className="w-full p-4 bg-slate-50 rounded-2xl border-none outline-none focus:ring-2 focus:ring-teal-500" placeholder="Featured Image URL" value={image} onChange={e=>setImage(e.target.value)} />
+            
+            {/* TinyMCE Editor Integration */}
+            <div className="rounded-2xl overflow-hidden border border-slate-200">
+              <Editor
+                apiKey="q1pibeckxw15ffl3jf95s9pi3bbmsoq7m49bmbzwcqyrxxtc"
+                init={{
+                  height: 500,
+                  menubar: true,
+                  plugins: [
+                    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                    'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                    'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                  ],
+                  toolbar: 'undo redo | blocks | ' +
+                    'bold italic forecolor | alignleft aligncenter ' +
+                    'alignright alignjustify | bullist numlist outdent indent | ' +
+                    'removeformat | table help',
+                  content_style: 'body { font-family:Inter,Helvetica,Arial,sans-serif; font-size:16px }'
+                }}
+                value={content}
+                onEditorChange={(newContent) => setContent(newContent)}
+              />
+            </div>
+
+            <button type="submit" className="w-full bg-slate-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-teal-600 transition-all shadow-lg shadow-slate-200">
+              {editingId ? "Update Research Analysis" : "Publish to HealthNexus"}
+            </button>
           </form>
         )}
       </div>
