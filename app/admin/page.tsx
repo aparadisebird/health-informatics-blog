@@ -71,7 +71,7 @@ export default function AdminDashboard() {
           updatedAt: serverTimestamp(),
         };
         await updateDoc(doc(db, "posts", editingId), postData);
-        alert("Story Updated!");
+        alert("Update Successful!");
       } else {
         await addDoc(collection(db, "posts"), {
           title,
@@ -82,7 +82,7 @@ export default function AdminDashboard() {
           createdAt: serverTimestamp(),
           updatedAt: serverTimestamp(),
         });
-        alert("Published!");
+        alert("Published Successfully!");
       }
       resetForm();
       fetchPosts();
@@ -93,7 +93,7 @@ export default function AdminDashboard() {
   };
 
   const deletePost = async (id: string) => {
-    if (confirm("Delete this story?")) {
+    if (confirm("Delete this item permanently?")) {
       await deleteDoc(doc(db, "posts", id));
       fetchPosts();
     }
@@ -116,7 +116,6 @@ export default function AdminDashboard() {
     setContent("");
   };
 
-  // Safe date formatter for the build process
   const formatDate = (createdAt: any) => {
     if (!createdAt) return "Draft";
     const date = createdAt instanceof Timestamp ? createdAt.toDate() : new Date(createdAt.seconds * 1000);
@@ -124,8 +123,8 @@ export default function AdminDashboard() {
   };
 
   if (loading) return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 font-bold text-teal-600">
-      INITIALIZING NEXUS ADMIN...
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 font-bold text-teal-600 tracking-widest">
+      LOADING NEXUS ADMIN...
     </div>
   );
 
@@ -133,61 +132,94 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-slate-50 p-6 md:p-10 text-slate-900">
       <div className="max-w-5xl mx-auto">
         <div className="flex justify-between items-center mb-10">
-          <h1 className="text-3xl font-black tracking-tighter">Nexus Admin</h1>
+          <div>
+             <h1 className="text-3xl font-black tracking-tighter">Nexus Admin</h1>
+             <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Content Management System</p>
+          </div>
           <div className="flex gap-4 items-center">
-            <Link href="/" className="text-sm font-bold text-slate-500 hover:text-teal-600">Site Home</Link>
-            <button onClick={() => auth.signOut()} className="bg-red-50 text-red-600 px-4 py-2 rounded-xl text-xs font-bold">Logout</button>
+            <Link href="/" className="text-sm font-bold text-slate-500 hover:text-teal-600 transition">Site Home</Link>
+            <button onClick={() => auth.signOut()} className="bg-red-50 text-red-600 px-5 py-2 rounded-xl text-xs font-bold hover:bg-red-600 hover:text-white transition">Logout</button>
           </div>
         </div>
         
         <div className="flex gap-2 mb-8 bg-white p-1.5 rounded-2xl border border-slate-200 w-fit">
-          <button onClick={() => setTab("manage")} className={`px-6 py-2 rounded-xl font-bold text-sm ${tab==='manage'?'bg-slate-900 text-white':'text-slate-500'}`}>Manage</button>
-          <button onClick={() => setTab("create")} className={`px-6 py-2 rounded-xl font-bold text-sm ${tab==='create'?'bg-teal-600 text-white':'text-slate-500'}`}>New Story</button>
+          <button onClick={() => { setTab("manage"); resetForm(); }} className={`px-8 py-2.5 rounded-xl font-bold text-sm transition ${tab==='manage'?'bg-slate-900 text-white shadow-lg':'text-slate-500'}`}>Manage</button>
+          <button onClick={() => setTab("create")} className={`px-8 py-2.5 rounded-xl font-bold text-sm transition ${tab==='create'?'bg-teal-600 text-white shadow-lg':'text-slate-500'}`}>{editingId ? "Edit Item" : "New Entry"}</button>
         </div>
 
         {tab === "manage" ? (
           <div className="grid gap-4">
             {posts.map(p => (
-              <div key={p.id} className="bg-white p-5 rounded-3xl border border-slate-200 flex justify-between items-center shadow-sm">
+              <div key={p.id} className="bg-white p-6 rounded-[2rem] border border-slate-200 flex justify-between items-center shadow-sm hover:shadow-md transition">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-slate-100 rounded-xl overflow-hidden flex-shrink-0">
+                  <div className="w-14 h-14 bg-slate-100 rounded-2xl overflow-hidden flex-shrink-0 border border-slate-50">
                     <img src={p.imageUrl || "https://placehold.co/100"} className="w-full h-full object-cover" alt="" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900 leading-tight">{p.title}</h3>
-                    <p className="text-[10px] font-black text-teal-600 uppercase tracking-widest">{p.category} • {formatDate(p.createdAt)}</p>
+                    <h3 className="font-bold text-slate-900 leading-tight mb-1">{p.title}</h3>
+                    <div className="flex items-center gap-2">
+                        <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md ${p.category === 'Project' ? 'bg-amber-100 text-amber-700' : 'bg-teal-50 text-teal-600'}`}>
+                            {p.category}
+                        </span>
+                        <span className="text-[9px] font-bold text-slate-400">{formatDate(p.createdAt)}</span>
+                    </div>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={()=>startEdit(p)} className="px-4 py-2 bg-slate-900 text-white rounded-xl font-bold text-xs">Edit</button>
-                  <button onClick={()=>deletePost(p.id)} className="px-4 py-2 bg-red-50 text-red-600 rounded-xl font-bold text-xs">Delete</button>
+                  <button onClick={()=>startEdit(p)} className="px-5 py-2.5 bg-slate-900 text-white rounded-xl font-bold text-xs hover:bg-teal-600 transition">Edit</button>
+                  <button onClick={()=>deletePost(p.id)} className="px-5 py-2.5 bg-red-50 text-red-600 rounded-xl font-bold text-xs hover:bg-red-600 hover:text-white transition">Delete</button>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="bg-white p-8 md:p-12 rounded-[3rem] shadow-xl space-y-6">
-            <div className="grid md:grid-cols-2 gap-4">
-              <input className="w-full p-4 bg-slate-50 rounded-2xl border-none outline-none font-bold" placeholder="Title" value={title} onChange={e=>setTitle(e.target.value)} required />
-              <input className="w-full p-4 bg-slate-50 rounded-2xl border-none outline-none font-bold" placeholder="Category" value={category} onChange={e=>setCategory(e.target.value)} required />
+          <form onSubmit={handleSubmit} className="bg-white p-8 md:p-12 rounded-[3rem] shadow-xl border border-slate-100 space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Entry Title</label>
+                <input className="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-teal-500 outline-none font-bold transition" placeholder="e.g. Chronic Kidney Disease ML" value={title} onChange={e=>setTitle(e.target.value)} required />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Category (Type 'Project' for Projects Page)</label>
+                <input 
+                  list="categories"
+                  className="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-teal-500 outline-none font-bold transition" 
+                  placeholder="Select or Type..." 
+                  value={category} 
+                  onChange={e=>setCategory(e.target.value)} 
+                  required 
+                />
+                <datalist id="categories">
+                  <option value="Project" />
+                  <option value="Research" />
+                  <option value="Informatics" />
+                  <option value="Public Awareness" />
+                </datalist>
+              </div>
             </div>
-            <input className="w-full p-4 bg-slate-50 rounded-2xl border-none outline-none text-sm" placeholder="Image URL" value={image} onChange={e=>setImage(e.target.value)} />
-            <div className="rounded-2xl overflow-hidden border border-slate-100">
+            
+            <div className="space-y-2">
+                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Featured Image URL</label>
+                <input className="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-teal-500 outline-none text-sm transition" placeholder="https://image-link.com/photo.jpg" value={image} onChange={e=>setImage(e.target.value)} />
+            </div>
+
+            <div className="rounded-2xl overflow-hidden border-2 border-slate-50">
               <Editor
                 apiKey="q1pibeckxw15ffl3jf95s9pi3bbmsoq7m49bmbzwcqyrxxtc"
                 value={content}
                 onEditorChange={(newContent) => setContent(newContent)}
                 init={{
-                  height: 500,
-                  menubar: false,
-                  plugins: ['advlist', 'autolink', 'lists', 'link', 'image', 'code', 'table', 'wordcount'],
-                  toolbar: 'undo redo | blocks | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist | removeformat | table code',
-                  content_style: 'body { font-family:Inter,sans-serif; font-size:16px }'
+                  height: 550,
+                  menubar: true,
+                  plugins: ['advlist', 'autolink', 'lists', 'link', 'image', 'code', 'table', 'wordcount', 'fullscreen', 'media'],
+                  toolbar: 'undo redo | blocks | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist | table link image | removeformat code fullscreen',
+                  content_style: 'body { font-family:Inter,sans-serif; font-size:16px; color: #334155; line-height: 1.6; }'
                 }}
               />
             </div>
-            <button type="submit" className="w-full bg-slate-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-teal-600 transition-all">
-              {editingId ? "Update Publication" : "Launch to Nexus Feed"}
+
+            <button type="submit" className="w-full bg-slate-900 text-white py-6 rounded-2xl font-black text-lg hover:bg-teal-600 transition-all shadow-xl shadow-slate-200">
+              {editingId ? "Update Entry" : "Publish to Platform"}
             </button>
           </form>
         )}
