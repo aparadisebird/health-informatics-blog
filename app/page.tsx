@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
-import { collection, query, orderBy, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, getDocs, where } from "firebase/firestore";
 import Link from 'next/link';
 import Logo from "@/components/Logo";
 
@@ -25,7 +25,14 @@ export default function Home() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+        // FILTER: Fetch everything EXCEPT "Project"
+        const q = query(
+          collection(db, "posts"), 
+          where("category", "!=", "Project"),
+          orderBy("category"), 
+          orderBy("createdAt", "desc")
+        );
+        
         const querySnapshot = await getDocs(q);
         const postsData = querySnapshot.docs.map(doc => ({
           id: doc.id,
@@ -33,7 +40,18 @@ export default function Home() {
         })) as Post[];
         setPosts(postsData);
       } catch (error) {
-        console.error("Error fetching posts:", error);
+        console.error("Filter error (likely missing index):", error);
+        
+        // FALLBACK: If the filter fails, fetch all and filter locally 
+        // This ensures your site stays live while Firebase builds the index
+        const fallbackQ = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+        const fallbackSnapshot = await getDocs(fallbackQ);
+        const allPosts = fallbackSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        })) as Post[];
+        
+        setPosts(allPosts.filter(post => post.category !== "Project"));
       } finally {
         setLoading(false);
       }
@@ -43,7 +61,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#f8fafc]">
-      {/* Navigation - Updated with Projects */}
+      {/* Navigation */}
       <nav className="p-4 bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-4">
@@ -56,10 +74,7 @@ export default function Home() {
           <div className="flex items-center gap-6 md:gap-8">
             <Link href="/" className="text-[10px] md:text-sm font-bold text-slate-600 hover:text-teal-600 uppercase tracking-widest transition">Home</Link>
             <Link href="#publications" className="text-[10px] md:text-sm font-bold text-slate-600 hover:text-teal-600 uppercase tracking-widest transition">Blogs</Link>
-            
-            {/* ADDED PROJECTS LINK */}
             <Link href="/projects" className="text-[10px] md:text-sm font-bold text-teal-600 hover:text-teal-700 uppercase tracking-widest transition underline decoration-2 underline-offset-4">Projects</Link>
-            
             <Link href="#about" className="text-[10px] md:text-sm font-bold text-slate-600 hover:text-teal-600 uppercase tracking-widest transition">About</Link>
             <Link href="#contact" className="text-[10px] md:text-sm font-bold text-slate-600 hover:text-teal-600 uppercase tracking-widest transition">Contact</Link>
           </div>
@@ -128,7 +143,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Publications Section */}
+      {/* Publications Section - Now filtered to EXCLUDE Projects */}
       <section id="publications" className="max-w-6xl mx-auto px-6 py-20">
         <div className="flex items-center gap-4 mb-12">
           <h3 className="text-3xl font-black text-slate-900 tracking-tighter">Latest Stories</h3>
@@ -137,6 +152,8 @@ export default function Home() {
         
         {loading ? (
           <div className="text-center py-20 text-slate-400 font-medium italic">Retrieving research data...</div>
+        ) : posts.length === 0 ? (
+          <div className="text-center py-20 text-slate-400 italic">No blog stories published yet.</div>
         ) : (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
